@@ -1,0 +1,294 @@
+[gd_scene load_steps=32 format=3 uid="uid://shpqqfvgynk7"]
+
+[ext_resource type="Script" path="res://parallax_background.gd" id="1_e1d01"]
+[ext_resource type="Texture2D" uid="uid://iutgsxhdinyw" path="res://assets/background/background_layer_1.png" id="1_vamna"]
+[ext_resource type="Texture2D" uid="uid://qh2s3ely3vid" path="res://assets/background/background_layer_2.png" id="3_j4e3w"]
+[ext_resource type="Texture2D" uid="uid://b40wy20lrygcq" path="res://assets/background/background_layer_3.png" id="4_ful5u"]
+[ext_resource type="Texture2D" uid="uid://ortl2v8c30fk" path="res://assets/water.png" id="5_jbn6w"]
+[ext_resource type="Script" path="res://water.gd" id="6_1rg7f"]
+[ext_resource type="Script" path="res://player.gd" id="6_47hvo"]
+[ext_resource type="Texture2D" uid="uid://car1gihpqfd1b" path="res://assets/sprite/_Run.png" id="6_yxuoe"]
+[ext_resource type="Texture2D" uid="uid://d1u78cagg6u0k" path="res://assets/sprite/_Jump.png" id="8_j7t2n"]
+[ext_resource type="Script" path="res://plat_spawner.gd" id="8_r0sqb"]
+[ext_resource type="Script" path="res://score.gd" id="10_e1gmg"]
+[ext_resource type="FontFile" uid="uid://blswde6hwex3a" path="res://assets/sprite/PixelifySans-VariableFont_wght.ttf" id="11_3gmo0"]
+[ext_resource type="Script" path="res://game_over.gd" id="11_57cu6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u73x7"]
+size = Vector2(522, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ey1k6"]
+radius = 6.0
+height = 38.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxrhv"]
+atlas = ExtResource("6_yxuoe")
+region = Rect2(0, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5lsm"]
+atlas = ExtResource("6_yxuoe")
+region = Rect2(120, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nc4pp"]
+atlas = ExtResource("6_yxuoe")
+region = Rect2(240, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yp7rx"]
+atlas = ExtResource("6_yxuoe")
+region = Rect2(360, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1cvw"]
+atlas = ExtResource("6_yxuoe")
+region = Rect2(480, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iht6r"]
+atlas = ExtResource("6_yxuoe")
+region = Rect2(600, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6vwp"]
+atlas = ExtResource("6_yxuoe")
+region = Rect2(720, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eugv1"]
+atlas = ExtResource("6_yxuoe")
+region = Rect2(840, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq63h"]
+atlas = ExtResource("6_yxuoe")
+region = Rect2(960, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2rgg"]
+atlas = ExtResource("6_yxuoe")
+region = Rect2(1080, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5egmf"]
+atlas = ExtResource("8_j7t2n")
+region = Rect2(0, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjoc7"]
+atlas = ExtResource("8_j7t2n")
+region = Rect2(120, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plwi1"]
+atlas = ExtResource("8_j7t2n")
+region = Rect2(240, 0, 120, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tas32"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxrhv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5lsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nc4pp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yp7rx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1cvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iht6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6vwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eugv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq63h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2rgg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5egmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjoc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plwi1")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7n4y"]
+bg_color = Color(0.0470588, 0.0470588, 0.0470588, 0.443137)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfpew"]
+bg_color = Color(0.419506, 0, 0.0788644, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="main" type="Node2D"]
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(1, 0.674419, 0.612902, 1)
+energy = 0.45
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.737255)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("1_e1d01")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 1)
+motion_mirroring = Vector2(512, 0)
+
+[node name="BackgroundLayer1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(256, 127)
+scale = Vector2(1.6, 1.43333)
+texture = ExtResource("1_vamna")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.7, 1)
+motion_mirroring = Vector2(512, 0)
+
+[node name="BackgroundLayer1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(256, 127)
+scale = Vector2(1.6, 1.43333)
+texture = ExtResource("3_j4e3w")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(512, 0)
+
+[node name="BackgroundLayer1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2(256, 127)
+scale = Vector2(1.6, 1.43333)
+texture = ExtResource("4_ful5u")
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground"]
+offset_right = 512.0
+offset_bottom = 256.0
+color = Color(0, 0, 0, 0.756863)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(1.3, 1)
+motion_mirroring = Vector2(512, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer2"]
+offset_top = 224.0
+offset_right = 512.0
+offset_bottom = 254.0
+texture = ExtResource("5_jbn6w")
+stretch_mode = 1
+
+[node name="water" type="Area2D" parent="ParallaxBackground"]
+script = ExtResource("6_1rg7f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParallaxBackground/water"]
+position = Vector2(251, 236)
+shape = SubResource("RectangleShape2D_u73x7")
+
+[node name="player" type="CharacterBody2D" parent="."]
+position = Vector2(72, 76)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("6_47hvo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(-6, 21)
+shape = SubResource("CapsuleShape2D_ey1k6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
+sprite_frames = SubResource("SpriteFrames_tas32")
+animation = &"jump"
+autoplay = "default"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="player"]
+
+[node name="platSpawner" type="Node" parent="."]
+script = ExtResource("8_r0sqb")
+
+[node name="ScoreLayer" type="CanvasLayer" parent="."]
+
+[node name="score" type="Label" parent="ScoreLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("11_3gmo0")
+theme_override_font_sizes/font_size = 30
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("10_e1gmg")
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("11_57cu6")
+
+[node name="Panel" type="Panel" parent="GameOver"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a7n4y")
+
+[node name="score" type="Label" parent="GameOver"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 120.0
+offset_bottom = 175.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("11_3gmo0")
+theme_override_font_sizes/font_size = 40
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOver" type="Label" parent="GameOver"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -228.0
+offset_right = 228.0
+offset_bottom = 109.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("11_3gmo0")
+theme_override_font_sizes/font_size = 90
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryButton" type="Button" parent="GameOver"]
+custom_minimum_size = Vector2(200, 20)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -63.0
+offset_right = 100.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("11_3gmo0")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_gfpew")
+text = "Restart
+"
+
+[connection signal="body_entered" from="ParallaxBackground/water" to="ParallaxBackground/water" method="_on_body_entered"]
+[connection signal="pressed" from="GameOver/RetryButton" to="GameOver" method="_on_retry_button_pressed"]

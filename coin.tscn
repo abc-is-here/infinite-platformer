@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://b78srd77oi3pp"]
+
+[ext_resource type="Texture2D" uid="uid://cmp6ln3xswceh" path="res://assets/coin.png" id="1_pwo82"]
+[ext_resource type="Script" path="res://coin.gd" id="1_w2ojt"]
+[ext_resource type="AudioStream" uid="uid://dgdj4bgepvn1e" path="res://assets/audio/coin.mp3" id="3_wlkb6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yo8kr"]
+radius = 17.0
+
+[sub_resource type="Animation" id="Animation_dpx23"]
+resource_name = "spin"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Coin:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.05, 1), Vector2(-1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_oq5hq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Coin:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gxfko"]
+_data = {
+"RESET": SubResource("Animation_oq5hq"),
+"spin": SubResource("Animation_dpx23")
+}
+
+[node name="coin" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_w2ojt")
+
+[node name="Coin" type="Sprite2D" parent="."]
+texture = ExtResource("1_pwo82")
+
+[node name="PointLight2D" type="PointLight2D" parent="Coin"]
+color = Color(0.807843, 1, 0, 1)
+energy = 1.41
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.705882)
+texture = ExtResource("1_pwo82")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yo8kr")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wlkb6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gxfko")
+}
+autoplay = "spin"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
